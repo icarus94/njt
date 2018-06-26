@@ -7,6 +7,7 @@ import njt.myproject.dax.services.TodoListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,7 +31,41 @@ public class DashboardController {
 
         List<UserHasTodoList> userHasTodoLists = todoListService.getTodoListByUserId(user.getId());
         model.addObject("userTaskLists", userHasTodoLists);
-        System.out.println("Count"+userHasTodoLists.size());
+
         return model;
     }
+
+
+    @PostMapping(value = "")
+    public String addNewTaskList(){
+
+        return "redirect:my-dashboard";
+    }
+
+    public String editTaskList(){
+
+        return "redirect:my-dashboard";
+    }
+
+    public String deleteTaskList(){
+
+        return "redirect:my-dashboard";
+    }
+
+    public String addNewTask(){
+
+        return "redirect:my-dashboard";
+    }
+
+    public String editTask(){
+
+        return "redirect:my-dashboard";
+    }
+
+    public String deleteTask(){
+
+        return "redirect:my-dashboard";
+    }
+
+
 }

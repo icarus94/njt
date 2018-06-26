@@ -87,8 +87,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description_edit">Description:</label>
-                        <form:textarea id="description_edit" class="form-control" rows="5" path="description">
-                        </form:textarea>
+                        <form:textarea id="description_edit" class="form-control" rows="5" path="description"/>
                     </div>
                     <div class="form-group">
                         <label for="due_date_edit">Due date:</label>

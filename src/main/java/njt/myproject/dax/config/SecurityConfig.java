@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().hasAnyAuthority("USER")
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/my-dashboard")
+                .defaultSuccessUrl("/my-dashboard",true)
                 .loginPage("/login")
                 .loginProcessingUrl("/loginAction")
                 .permitAll()
