@@ -1,0 +1,61 @@
+#login-content .nav-tabs > li {
+    float: none;
+    display: inline-block;
+    zoom: 1;
+}
+
+#login-content .nav-tabs {
+    text-align: center;
+}
+
+#myTabContent {
+    margin-top: 15px;
+}
+
+.btn-cursor-pointer {
+    cursor: pointer !important;
+}
+
+#add-task-category {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.add-task-in-category {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.task-item-options {
+    text-align: right;
+}
+
+.task-item-panel .btn {
+    padding: 6px 6px !important;
+}
+
+.task-item-options .task-check {
+    width: 29px;
+    height: 29px;
+    vertical-align: middle;
+    margin: 0 !important;
+}
+
+#task-content .task-item-panel {
+    margin: 15px;
+}
+
+.error_input_message {
+    color: red;
+}
+
+/*.task-item-panel .row{*/
+/*overflow: hidden;*/
+/*}*/
+
+/*.task-item-panel [class*="col-"]{*/
+/*margin-bottom: -99999px;*/
+/*padding-bottom: 99999px;*/
+/*}*/
