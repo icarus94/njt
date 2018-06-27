@@ -79,7 +79,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form:form>
+            <form:form action="/edit-task" method="post" modelAttribute="editTaskForm">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name_edit">Name:</label>
@@ -91,7 +91,7 @@
                     </div>
                     <div class="form-group">
                         <label for="due_date_edit">Due date:</label>
-                        <form:input type="text" id="due_date_edit" path="due_date" class="form-control due_date" />
+                        <form:input type="text" id="due_date_edit" path="dueDate" class="form-control due_date" />
                     </div>
                     <div class="form-group">
                         <label for="priority_edit">Priority:</label>
@@ -100,10 +100,11 @@
                             <option value="2">Medium</option>
                             <option value="3">High</option>
                         </form:select>
+                        <form:hidden id="button-submit-id" path="id" cssClass="form-control"/>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success button-submit-id" name="id" value="">Edit</button>
+                    <button type="submit" class="btn btn-success ">Edit</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </form:form>
