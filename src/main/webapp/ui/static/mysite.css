@@ -51,8 +51,13 @@
     color: red;
 }
 
-.task-list-btn {
+.btn.task-list-btn {
+    display: none;
     padding: 6px 6px !important;
+}
+
+.panel-heading:hover .btn.task-list-btn{
+    display: inline-block !important;
 }
 
 /*.task-item-panel .row{*/
