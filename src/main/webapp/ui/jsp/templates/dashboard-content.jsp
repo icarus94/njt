@@ -13,22 +13,21 @@
                     <div class="panel-title">
                         <div class="row">
                             <div class="col-xs-12 col-md-8" style="text-align: left">
-                                <a data-toggle="collapse"
-                                   href="#collapse${userTaskItem.todoList.id}">${userTaskItem.todoList.name}</a>
+                                <a data-toggle="collapse" style="font-size: 20px;" class="task-list-collapse-btn"
+                                   href="#collapse${userTaskItem.todoList.id}">${userTaskItem.todoList.name} (${fn:length(userTaskItem.todoList.tasks)})</a>
                             </div>
                             <div class="col-xs-12 col-md-4" style="text-align: right">
-                                <button type="button" class="btn btn-warning btn-cursor-pointer edit-task-list"
+                                <button type="button" class="btn btn-warning btn-cursor-pointer edit-task-list task-list-btn"
                                         data-parent-id="${userTaskItem.todoList.id}"
                                         data-name="${userTaskItem.todoList.name}"
-                                        data-target="#editTaskCategory">Edit task list &nbsp;
+                                        data-target="#editTaskCategory">
                                     <i class="fas fa-pen-square"></i>
                                 </button>
-                                <button type="button" class="btn btn-danger btn-cursor-pointer delete-task-list"
+                                <button type="button" class="btn btn-danger btn-cursor-pointer delete-task-list task-list-btn"
                                         data-parent-id="${userTaskItem.todoList.id}"
-                                        data-target="#deleteTaskCategory">Delete task list &nbsp;
+                                        data-target="#deleteTaskCategory">
                                     <i class="fas fa-trash"></i>
                                 </button>
-                                (${fn:length(userTaskItem.todoList.tasks)})
                             </div>
                         </div>
                     </div>

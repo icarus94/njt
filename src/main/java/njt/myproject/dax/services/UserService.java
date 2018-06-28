@@ -8,16 +8,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @Service
 public class UserService {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     @Transactional
     public User createNewUser(RegistrationForm registrationForm) {
@@ -26,7 +29,7 @@ public class UserService {
         user.setName(registrationForm.getName());
         user.setSurname(registrationForm.getSurname());
         user.setPassword(bCryptPasswordEncoder.encode(registrationForm.getPassword()));
-        user.setActive((byte)1);
+        user.setActive((byte) 1);
         return userRepository.save(user);
     }
 
@@ -34,8 +37,4 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public User findUserById(int id) {
-        Optional<User> user = userRepository.findById(id);
-        return user.orElse(null);
-    }
 }

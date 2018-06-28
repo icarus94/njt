@@ -8,7 +8,7 @@ public class Helper {
             return null;
         if (task.getDone() != 1) {
             if (task.getPriority() == 1) {
-                return "panel-default";
+                return "panel-info";
             } else if (task.getPriority() == 3) {
                 return "panel-danger";
             } else {
@@ -23,7 +23,7 @@ public class Helper {
         return isInteger(s, 10);
     }
 
-    public static boolean isInteger(String s, int radix) {
+    private static boolean isInteger(String s, int radix) {
         if (s.isEmpty()) return false;
         for (int i = 0; i < s.length(); i++) {
             if (i == 0 && s.charAt(i) == '-') {

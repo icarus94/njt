@@ -16,8 +16,12 @@ import javax.validation.Valid;
 @Controller
 public class LoginController {
 
+    private final UserService userService;
+
     @Autowired
-    UserService userService;
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping(value = {"/login", "/register", "/"}, method = {RequestMethod.GET})
     public String loginRegisterPage(HttpServletRequest request, Model model) {
@@ -41,7 +45,7 @@ public class LoginController {
             if (userService.findByEmail(registrationForm.getEmail()) == null) {
                 User u = userService.createNewUser(registrationForm);
                 if (u == null) {
-                    redirectAttributes.addFlashAttribute("flash_error_message", "User with given email already exists!");
+                    redirectAttributes.addFlashAttribute("flash_error_message", "An error occurred");
                     return "redirect:register";
                 } else {
                     System.out.println(u);

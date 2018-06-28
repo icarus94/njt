@@ -1,11 +1,9 @@
 package njt.myproject.dax.controllers;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import javassist.NotFoundException;
 import njt.myproject.dax.dto.form.AddTaskForm;
 import njt.myproject.dax.dto.form.EditTaskForm;
 import njt.myproject.dax.dto.form.EditTaskListForm;
-import njt.myproject.dax.dto.form.RegistrationForm;
 import njt.myproject.dax.helper.Helper;
 import njt.myproject.dax.models.Task;
 import njt.myproject.dax.models.TodoList;
@@ -37,11 +35,15 @@ import java.util.Map;
 @Controller
 public class DashboardController {
 
-    @Autowired
-    TodoListService todoListService;
+    private final TodoListService todoListService;
+
+    private final TaskService taskService;
 
     @Autowired
-    TaskService taskService;
+    public DashboardController(TaskService taskService, TodoListService todoListService) {
+        this.taskService = taskService;
+        this.todoListService = todoListService;
+    }
 
     /*
            # ===============================
@@ -79,11 +81,15 @@ public class DashboardController {
                                  final RedirectAttributes redirectAttributes) {
         System.out.println(">>>>>>>add-new-task-list route<<<<<<");
         User user = principal.getUser();
-        TodoList todoList = todoListService.saveTodoList(name, user);
-        if (todoList == null) {
-            redirectAttributes.addFlashAttribute("flash_error_message", "An error occurred");
+        if(name.trim().isEmpty()){
+            redirectAttributes.addFlashAttribute("flash_error_message", "Name is required");
         } else {
-            redirectAttributes.addFlashAttribute("flash_success_message", "Successfully saved");
+            TodoList todoList = todoListService.saveTodoList(name, user);
+            if (todoList == null) {
+                redirectAttributes.addFlashAttribute("flash_error_message", "An error occurred");
+            } else {
+                redirectAttributes.addFlashAttribute("flash_success_message", "Successfully saved");
+            }
         }
         return "redirect:my-dashboard";
     }
@@ -100,7 +106,7 @@ public class DashboardController {
 
         TodoList todoList = null;
         try {
-            todoList = todoListService.updateTodoList(editTaskListForm.getId(), editTaskListForm.getName());
+            todoList = todoListService.updateTodoList(editTaskListForm.getId(), editTaskListForm.getName(), user);
         } catch (NotFoundException e) {
             e.printStackTrace();
         }
@@ -108,7 +114,7 @@ public class DashboardController {
         if (todoList == null) {
             redirectAttributes.addFlashAttribute("flash_error_message", "An error occurred");
         } else {
-            redirectAttributes.addFlashAttribute("flash_success_message", "Successfully saved");
+            redirectAttributes.addFlashAttribute("flash_success_message", "Successfully edited");
         }
         return "redirect:my-dashboard";
     }

@@ -15,7 +15,7 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <form:form action="/logout" method="post" class="navbar-form navbar-right">
-                    <button type="submit" class="btn btn-default">Log out</button>
+                    <button type="submit" id="logout-btn" class="btn btn-default">Log out</button>
                 </form:form>
             </div>
 

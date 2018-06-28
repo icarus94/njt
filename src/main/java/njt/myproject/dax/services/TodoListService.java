@@ -43,7 +43,7 @@ public class TodoListService {
     }
 
     @Transactional
-    public TodoList updateTodoList(int id, String name) throws NotFoundException {
+    public TodoList updateTodoList(int id, String name, User user) throws NotFoundException {
         TodoList todoList = todoListRepository.findById(id).orElse(null);
         if (todoList != null) {
             //TODO premission check
