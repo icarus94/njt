@@ -55,7 +55,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Task category name</label>
-                        <form:input path="name" cssClass="form-control task_list_name"/>
+                        <form:input path="name" cssClass="form-control task_list_name" required="required"/>
                         <form:hidden path="id" cssClass="task_list_id"/>
                         <small id="emailHelp" class="form-text text-muted">Name your categories with unique names
                         </small>

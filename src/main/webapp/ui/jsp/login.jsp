@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--@elvariable id="request_type" type="java.lang.String"--%>
+<%--@elvariable id="registrationForm" type="njt.myproject.dax.dto.form.RegistrationForm"--%>
 <html>
 <head>
     <title>ToDo Task Scheduler</title>

@@ -15,7 +15,7 @@ public class Task implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private int id;
 
@@ -38,7 +38,7 @@ public class Task implements Serializable {
     private byte priority;
 
     //bi-directional many-to-one association to TodoList
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "todo_list_id", nullable = false)
     private TodoList todoList;
 
@@ -101,4 +101,15 @@ public class Task implements Serializable {
         this.todoList = todoList;
     }
 
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", name='" + name + '\'' +
+                ", done=" + done +
+                ", dueDate=" + dueDate +
+                ", priority=" + priority +
+                '}';
+    }
 }

@@ -23,15 +23,6 @@ public class TodoListService {
     @Autowired
     UserHasTodoListRepository userHasTodoListRepository;
 
-    @Transactional
-    public TodoList getTaskListById(int id) {
-        return todoListRepository.findById(id).orElse(null);
-    }
-
-    @Transactional
-    public TodoList saveTodoList(TodoList todoList) {
-        return todoListRepository.save(todoList);
-    }
 
     @Transactional
     public TodoList saveTodoList(String name, User user) {
@@ -52,11 +43,6 @@ public class TodoListService {
     }
 
     @Transactional
-    public TodoList updateTodoList(TodoList todoList) {
-        return todoListRepository.save(todoList);
-    }
-
-    @Transactional
     public TodoList updateTodoList(int id, String name) throws NotFoundException {
         TodoList todoList = todoListRepository.findById(id).orElse(null);
         if (todoList != null) {
@@ -66,11 +52,6 @@ public class TodoListService {
         } else {
             throw new NotFoundException("Todo list not found.");
         }
-    }
-
-    @Transactional
-    public void deleteTodoList(int id) {
-        todoListRepository.deleteById(id);
     }
 
     @Transactional

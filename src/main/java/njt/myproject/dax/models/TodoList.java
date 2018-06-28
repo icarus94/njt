@@ -23,7 +23,7 @@ public class TodoList implements Serializable {
     private String name;
 
     //bi-directional many-to-one association to Task
-    @OneToMany(mappedBy = "todoList", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "todoList", fetch = FetchType.EAGER) // cascade = CascadeType.ALL
     private List<Task> tasks;
 
     //bi-directional many-to-one association to UserHasTodoList

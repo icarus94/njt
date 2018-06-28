@@ -8,13 +8,12 @@ $(document).ready(function () {
         minDate: 0
     });
 
-    $(".task-check").on('click', function () {
-        var id = $(this).data('id');
-        if ($(this).is(":checked")) {
-            console.log("Checked:" + id);
-        } else {
-            console.log("Unchecked:" + id);
-        }
+    $(".task-add").on('click', function () {
+        var id = $(this).data('parent-id');
+        var modal = $($(this).data('target'));
+        console.log("IT is "+id);
+        $("#parent_id_n", modal).val(id);
+        // modal.modal('toggle');
     });
 
     $(".editTask").on('click', function () {
@@ -24,7 +23,7 @@ $(document).ready(function () {
         var description = $(this).data('description');
         var priority = $(this).data('priority');
         var dueDate = $(this).data('due_date');
-        var done = $(this).data('done');
+        // var done = $(this).data('done');
 
         var modal = $($(this).data('target'));
         $("#button-submit-id", modal).val(id);
@@ -47,10 +46,10 @@ $(document).ready(function () {
         var id = $(this).data('id');
         var checked = null;
         if (this.checked) {
-            alert("checked "+id);
+            console.log("checked " + id);
             checked = 1;
         } else {
-            alert("unchecked "+id);
+            console.log("unchecked " + id);
             checked = 0;
         }
         $.ajax({
@@ -63,12 +62,18 @@ $(document).ready(function () {
             beforeSend: function (xhr) {
                 xhr.setRequestHeader(header, token);
             },
-            success: function(msg){
-                alert( "Data Saved:  ");
+            success: function (msg) {
                 console.log(msg);
+                var panel = $("#task_panel_" + id);
+                panel.removeClass();
+                panel.attr("class", "");
+                // panel.className ="";
+                panel.addClass("panel task-item-panel " + msg.label);
+                console.log(panel);
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown) {
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
                 alert("some error");
+                console.log(errorThrown);
                 event.preventDefault();
             }
         });
@@ -94,4 +99,13 @@ $(document).ready(function () {
         $(".task_list_id", modal).val(id);
         modal.modal('toggle');
     });
+
+    // $(".task-check").on('click', function () {
+    //     var id = $(this).data('id');
+    //     if ($(this).is(":checked")) {
+    //         console.log("Checked:" + id);
+    //     } else {
+    //         console.log("Unchecked:" + id);
+    //     }
+    // });
 });

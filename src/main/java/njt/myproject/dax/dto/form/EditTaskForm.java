@@ -1,6 +1,6 @@
 package njt.myproject.dax.dto.form;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
@@ -9,17 +9,14 @@ public class EditTaskForm {
 
     private int id;
 
-    @NotEmpty
-    @NotNull
+    @NotBlank(message = "Name field is required")
     private String name;
 
-    @NotEmpty
-    @NotNull
+    @NotBlank(message = "Description field is required")
     private String description;
 
     @NotNull(message = "Please fill due date field correctly.")
     private Date dueDate;
-
 
     private int priority;
 

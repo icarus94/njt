@@ -1,14 +1,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%--@elvariable id="userTaskLists" type="njt.myproject.dax.models.UserHasTodoList"--%>
+
 <div class="row" id="task-content">
     <div class="panel-group" id="accordion">
         <!-- closable panels -->
 
-        <%--second one--%>
+        <%--global one--%>
         <c:forEach var="userTaskItem" items="${userTaskLists}">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">
+                    <div class="panel-title">
                         <div class="row">
                             <div class="col-xs-12 col-md-8" style="text-align: left">
                                 <a data-toggle="collapse"
@@ -29,13 +31,13 @@
                                 (${fn:length(userTaskItem.todoList.tasks)})
                             </div>
                         </div>
-                    </h4>
+                    </div>
                 </div>
                 <div id="collapse${userTaskItem.todoList.id}" class="panel-collapse collapse">
                         <%--button--%>
                     <div class="row add-task-in-category">
                         <div class="col-xs-12 col-md-4 col-md-offset-4">
-                            <button type="button" class="btn btn-info btn-cursor-pointer" data-toggle="modal"
+                            <button type="button" class="btn btn-info btn-cursor-pointer task-add" data-toggle="modal"
                                     data-parent-id="${userTaskItem.todoList.id}"
                                     data-target="#createTask">Add new task &nbsp;
                                 <i class="fas fa-plus"></i>
@@ -47,7 +49,7 @@
 
                         <jsp:useBean id="helper" class="njt.myproject.dax.helper.Helper"/>
 
-                        <div class="panel ${helper.getPanelColor(task)} task-item-panel">
+                        <div class="panel ${helper.getPanelColor(task)} task-item-panel" id="task_panel_${task.id}">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-md-9 col-xs-12" style="text-align: left">
@@ -67,11 +69,11 @@
                                     <div class="col-xs-12 col-md-2 task-item-options">
                                         <c:choose>
                                             <c:when test="${task.done == 1}">
-                                                <input type="checkbox" class="task-check" value="" data-id="${task.id}"
+                                                <input type="checkbox" class="task-check" value="" data-id="${task.id}" title="Check button"
                                                        checked>
                                             </c:when>
                                             <c:otherwise>
-                                                <input type="checkbox" class="task-check" value="" data-id="${task.id}">
+                                                <input type="checkbox" class="task-check" value="" data-id="${task.id}" title="Check button">
                                             </c:otherwise>
                                         </c:choose>
                                         <button type="button" class="btn btn-warning editTask"
@@ -99,73 +101,3 @@
 </div>
 
 <jsp:include page="task-modals.jsp"/>
-
-<%--<div class="panel panel-default">--%>
-<%--<div class="panel-heading">--%>
-<%--<h4 class="panel-title">--%>
-<%--<a data-toggle="collapse" href="#collapse1">Task category 1</a>--%>
-<%--</h4>--%>
-<%--</div>--%>
-<%--<div id="collapse1" class="panel-collapse collapse in">--%>
-<%--<div class="row add-task-in-category">--%>
-<%--<div class="col-xs-12 col-md-4 col-md-offset-4">--%>
-<%--<button type="button" class="btn btn-info btn-cursor-pointer" data-toggle="modal"--%>
-<%--data-parent-id=""--%>
-<%--data-target="#createTask">Add new task &nbsp;--%>
-<%--<i class="fas fa-plus"></i>--%>
-<%--</button>--%>
-<%--</div>--%>
-<%--</div>--%>
-
-<%--<div class="panel panel-default task-item-panel">--%>
-<%--<div class="panel-heading">--%>
-<%--Second Task heading--%>
-<%--</div>--%>
-<%--<div class="panel-body">--%>
-<%--<div class="row">--%>
-<%--<div class="col-xs-9 col-md-10">--%>
-<%--First task--%>
-<%--</div>--%>
-<%--<div class="col-xs-3 col-md-2 task-item-options">--%>
-<%--<input type="checkbox" class="task-check" value="" data-id="id">--%>
-<%--<button type="button" class="btn btn-warning editTask"--%>
-<%--data-target="#editTask" data-id="id">--%>
-<%--<i class="fas fa-edit"></i>--%>
-<%--</button>--%>
-<%--<button type="button" class="btn btn-danger deleteTask"--%>
-<%--data-target="#deleteTask" data-id="id">--%>
-<%--<i class="fas fa-trash-alt"></i>--%>
-<%--</button>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-
-
-<%--<div class="panel panel-default task-item-panel">--%>
-<%--<div class="panel-heading">--%>
-<%--Second Task heading--%>
-<%--</div>--%>
-<%--<div class="panel-body">--%>
-
-<%--<div class="row">--%>
-<%--<div class="col-xs-9 col-md-10">--%>
-<%--Second task--%>
-<%--</div>--%>
-<%--<div class="col-xs-3 col-md-2 task-item-options">--%>
-<%--<input type="checkbox" class="task-check checkbox-primary" data-id="id">--%>
-<%--<button type="button" class="btn btn-warning">--%>
-<%--<i class="fas fa-edit"></i>--%>
-<%--</button>--%>
-<%--<button type="button" class="btn btn-danger">--%>
-<%--<i class="fas fa-trash-alt"></i>--%>
-<%--</button>--%>
-<%--</div>--%>
-<%--</div>--%>
-
-<%--</div>--%>
-<%--</div>--%>
-
-
-<%--</div>--%>
-<%--</div>--%>
