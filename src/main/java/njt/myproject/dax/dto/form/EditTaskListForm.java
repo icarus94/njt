@@ -7,7 +7,7 @@ public class EditTaskListForm {
     private int id;
 
     @NotBlank(message = "Name is required")
-    @Size(min = 1,max = 100)
+    @Size(max = 100, message = "Name field has max length of 100 characters")
     private String name;
 
     public int getId() {

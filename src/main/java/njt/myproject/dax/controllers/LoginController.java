@@ -2,8 +2,10 @@ package njt.myproject.dax.controllers;
 
 import njt.myproject.dax.dto.form.RegistrationForm;
 import njt.myproject.dax.models.User;
+import njt.myproject.dax.services.MyUserDetailsService;
 import njt.myproject.dax.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,7 +26,9 @@ public class LoginController {
     }
 
     @RequestMapping(value = {"/login", "/register", "/"}, method = {RequestMethod.GET})
-    public String loginRegisterPage(HttpServletRequest request, Model model) {
+    public String loginRegisterPage(HttpServletRequest request, Model model,@AuthenticationPrincipal MyUserDetailsService.MyUserPrincipal principal) {
+        if(principal != null && principal.getUser() != null)
+            return "redirect:my-dashboard";
         if (request.getRequestURI().equals("/register")) {
             model.addAttribute("request_type", "register");
         } else {

@@ -4,6 +4,7 @@ import javassist.NotFoundException;
 import njt.myproject.dax.dto.form.AddTaskForm;
 import njt.myproject.dax.dto.form.EditTaskForm;
 import njt.myproject.dax.dto.form.EditTaskListForm;
+import njt.myproject.dax.exceptions.PermissionDeniedException;
 import njt.myproject.dax.helper.Helper;
 import njt.myproject.dax.models.Task;
 import njt.myproject.dax.models.TodoList;
@@ -81,7 +82,7 @@ public class DashboardController {
                                  final RedirectAttributes redirectAttributes) {
         System.out.println(">>>>>>>add-new-task-list route<<<<<<");
         User user = principal.getUser();
-        if(name.trim().isEmpty()){
+        if (name.trim().isEmpty()) {
             redirectAttributes.addFlashAttribute("flash_error_message", "Name is required");
         } else {
             TodoList todoList = todoListService.saveTodoList(name, user);
@@ -109,6 +110,10 @@ public class DashboardController {
             todoList = todoListService.updateTodoList(editTaskListForm.getId(), editTaskListForm.getName(), user);
         } catch (NotFoundException e) {
             e.printStackTrace();
+        } catch (PermissionDeniedException e) {
+            e.printStackTrace();
+            redirectAttributes.addFlashAttribute("flash_error_message", e.getMessage());
+            return "redirect:my-dashboard";
         }
 
         if (todoList == null) {
@@ -131,6 +136,9 @@ public class DashboardController {
             } catch (NotFoundException e) {
                 e.printStackTrace();
                 redirectAttributes.addFlashAttribute("flash_error_message", "An error occurred");
+            } catch (PermissionDeniedException e) {
+                e.printStackTrace();
+                redirectAttributes.addFlashAttribute("flash_error_message", e.getMessage());
             }
         } else {
             redirectAttributes.addFlashAttribute("flash_error_message", "Bad request");

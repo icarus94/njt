@@ -1,31 +1,26 @@
 package njt.myproject.dax.dto.form;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 public class RegistrationForm {
 
-    @NotNull
-    @NotEmpty
-    @Size(min = 1,max = 30)
+    @NotBlank
+    @Size(max = 30)
     private String name;
 
-    @NotNull
-    @NotEmpty
-    @Size(min = 1,max = 30)
+    @NotBlank
+    @Size(max = 30)
     private String surname;
 
-    @NotNull
-    @NotEmpty
-    @Size(min = 1,max = 30)
+    @NotBlank
+    @Size(max = 30)
     private String password;
 
     private String matchingPassword; // TODO next implementation
 
-    @NotNull
-    @NotEmpty
-    @Size(min = 1,max = 30)
+    @NotBlank
+    @Size(max = 50)
     private String email;
 
     public String getName() {

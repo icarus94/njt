@@ -2,6 +2,7 @@ package njt.myproject.dax.dto.form;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 public class EditTaskForm {
@@ -10,6 +11,7 @@ public class EditTaskForm {
     private int id;
 
     @NotBlank(message = "Name field is required")
+    @Size(max = 100,  message = "Name field has max length of 100 characters")
     private String name;
 
     @NotBlank(message = "Description field is required")
