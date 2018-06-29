@@ -24,10 +24,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .anyRequest().hasAnyAuthority("USER")
+                .antMatchers("/my-dashboard").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(userRoute).hasAnyAuthority("USER")
+                .antMatchers(adminRoute).hasAnyAuthority("ADMIN")
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/my-dashboard",true)
+                .defaultSuccessUrl("/my-dashboard", true)
                 .loginPage("/login")
                 .loginProcessingUrl("/loginAction")
                 .permitAll()
@@ -42,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/register","/registerAction");
+        web.ignoring().antMatchers("/register", "/registerAction");
         web.ignoring().antMatchers("/webjars/**");
         web.ignoring().antMatchers("/*.css");
         web.ignoring().antMatchers("/*.js");
@@ -53,5 +55,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
+
+    private String[] userRoute = {
+
+            "/add-new-task-list",
+            "/edit-task-list",
+            "/delete-task-list",
+            "/add-task",
+            "/edit-task",
+            "/delete-task",
+            "/check-task",
+    };
+
+    private String[] adminRoute = {
+            "/user-dashboard/**",
+            "/admin-view",
+            "/admin-create-user",
+            "/admin-edit-user",
+            "/admin-delete-user"
+    };
 
 }

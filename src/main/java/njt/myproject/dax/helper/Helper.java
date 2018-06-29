@@ -34,4 +34,20 @@ public class Helper {
         }
         return true;
     }
+
+    public String getRowColor(Task task) {
+        if (task == null)
+            return null;
+        if (task.getDone() != 1) {
+            if (task.getPriority() == 1) {
+                return "info";
+            } else if (task.getPriority() == 3) {
+                return "danger";
+            } else {
+                return "warning";
+            }
+        } else {
+            return "success";
+        }
+    }
 }

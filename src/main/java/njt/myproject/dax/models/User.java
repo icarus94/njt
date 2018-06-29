@@ -30,12 +30,16 @@ public class User implements Serializable {
     @Column(nullable = false, length = 30)
     private String surname;
 
+    @Column(nullable = false)
+    private byte role;
+
 
     //bi-directional many-to-one association to UserHasTodoList
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<UserHasTodoList> userHasTodoLists;
 
     public User() {
+        this.active = (byte) 1;
     }
 
     public int getId() {
@@ -84,6 +88,14 @@ public class User implements Serializable {
 
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+
+    public byte getRole() {
+        return role;
+    }
+
+    public void setRole(byte role) {
+        this.role = role;
     }
 
 

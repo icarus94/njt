@@ -15,4 +15,5 @@ public interface UserHasTodoListRepository extends JpaRepository<UserHasTodoList
 
     @Query("from UserHasTodoList where user_id = :user_id")
     List<UserHasTodoList> getByUserId(@Param("user_id") int user_id);
+
 }

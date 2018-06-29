@@ -48,7 +48,11 @@ public class MyUserDetailsService implements UserDetailsService {
         @Override
         public Collection<? extends GrantedAuthority> getAuthorities() {
             final Set<GrantedAuthority> grntAuths = new HashSet<GrantedAuthority>();
-            grntAuths.add(new SimpleGrantedAuthority("USER"));
+            if(this.user.getRole() == (byte) 1){
+                grntAuths.add(new SimpleGrantedAuthority("ADMIN"));
+            }else {
+                grntAuths.add(new SimpleGrantedAuthority("USER"));
+            }
             return grntAuths;
         }
 

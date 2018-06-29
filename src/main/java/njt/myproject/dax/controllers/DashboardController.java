@@ -52,10 +52,14 @@ public class DashboardController {
            # ===============================
     */
 
+
     @RequestMapping(value = "/my-dashboard")
     public ModelAndView dashboard(@AuthenticationPrincipal MyUserDetailsService.MyUserPrincipal principal) {
         System.out.println(">>>>>>>My dashboard route<<<<<<");
         User user = principal.getUser();
+        if (user.getRole() == (byte) 1) {
+            return new ModelAndView("redirect:admin-view");
+        }
 
         List<UserHasTodoList> userHasTodoLists = todoListService.getTodoListByUserId(user.getId());
 
