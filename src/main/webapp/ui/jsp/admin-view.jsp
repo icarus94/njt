@@ -11,6 +11,7 @@
     </div>
     <jsp:include page="admin/user-create-modals.jsp"/>
     <jsp:include page="admin/user-edit-modal.jsp"/>
+    <jsp:include page="admin/user-delete-modal.jsp"/>
 </div>
 </body>
 </html>

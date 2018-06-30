@@ -22,4 +22,19 @@ $(document).ready(function () {
 
         modal.modal('toggle');
     });
+
+    $(".delete-user-btn").on('click', function () {
+
+        var id = $(this).data('id');
+        var user_name = $(this).data('user_name');
+        var user_surname = $(this).data('user_surname');
+
+        var modal = $($(this).data('target'));
+        console.log(user_name);
+        $("#user_id", modal).val(id);
+        $("#user_name", modal).html(" " + user_name + " " + user_surname);
+
+        modal.modal('toggle');
+    });
+
 });

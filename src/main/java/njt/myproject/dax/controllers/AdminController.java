@@ -5,6 +5,7 @@ import njt.myproject.dax.dto.UserAddMapper;
 import njt.myproject.dax.dto.UserEditMapper;
 import njt.myproject.dax.dto.form.AddUserForm;
 import njt.myproject.dax.dto.form.EditUserForm;
+import njt.myproject.dax.exceptions.PermissionDeniedException;
 import njt.myproject.dax.helper.Helper;
 import njt.myproject.dax.models.User;
 import njt.myproject.dax.services.MyUserDetailsService;
@@ -17,10 +18,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -124,12 +122,22 @@ public class AdminController {
         return model;
     }
 
-//    @PostMapping(value = "/admin-delete-user")
-//    public String deleteUser() {
-//        System.out.println(">>>>>>>admin-delete-user route<<<<<<");
-//
-//        return "redirect:admin-view";
-//    }
+    @PostMapping(value = "/admin-delete-user")
+    public String deleteUser(@RequestParam("id") String id, final RedirectAttributes redirectAttributes) {
+        System.out.println(">>>>>>>admin-delete-user route<<<<<<");
+        if (Helper.isInteger(id)) {
+            try {
+                userService.deleteUserById(Integer.parseInt(id));
+                redirectAttributes.addFlashAttribute("flash_success_message", "Successfully deleted");
+            } catch (NotFoundException e) {
+                e.printStackTrace();
+                redirectAttributes.addFlashAttribute("flash_error_message", "An error occurred");
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("flash_error_message", "Bad request");
+        }
+        return "redirect:admin-view";
+    }
 
     private String getErrors(BindingResult result) {
         StringBuilder sb = new StringBuilder();

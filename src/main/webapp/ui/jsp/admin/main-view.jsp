@@ -50,10 +50,14 @@
                     </c:choose>
                 </td>
                 <td>
-                    <a type="button" class="btn btn-info btn-cursor-pointer"
-                       href="/user-dashboard/${user_from_list.id}">
-                        <i class="fas fa-eye"></i>
-                    </a>
+                    <button type="button"
+                            class="btn btn-danger btn-cursor-pointer delete-user-btn"
+                            data-id="${user_from_list.id}"
+                            data-user_name="${user_from_list.name}"
+                            data-user_surname="${user_from_list.surname}"
+                            data-target="#deleteUser">
+                        <i class="fas fa-trash"></i>
+                    </button>
                     <button type="button"
                             class="btn btn-warning btn-cursor-pointer edit-user-btn"
                             data-id="${user_from_list.id}"
@@ -65,6 +69,12 @@
                             data-target="#editUser">
                         <i class="fas fa-pen-square"></i>
                     </button>
+                    <c:if test="${user_from_list.role != 1}">
+                        <a type="button" class="btn btn-info btn-cursor-pointer"
+                           href="/user-dashboard/${user_from_list.id}">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </c:if>
                 </td>
             </tr>
             <c:set var="row_number" value="${row_number + 1}" scope="page"/>

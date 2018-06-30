@@ -57,7 +57,7 @@ public class UserService {
         User dbUser = userRepository.findById(user.getId()).orElse(null);
         if (dbUser == null)
             throw new NotFoundException("User not found.");
-        if (user.getPassword().trim().isEmpty())
+        if (!user.getPassword().trim().isEmpty())
             dbUser.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         dbUser.setEmail(user.getEmail());
         dbUser.setRole(user.getRole());
@@ -65,7 +65,7 @@ public class UserService {
         dbUser.setSurname(user.getSurname());
         dbUser.setActive(user.getActive());
 
-        return userRepository.save(user);
+        return userRepository.save(dbUser);
     }
 
     public User findById(int user_id) throws NotFoundException {
@@ -73,5 +73,13 @@ public class UserService {
         if (dbUser == null)
             throw new NotFoundException("User not found.");
         return dbUser;
+    }
+
+    @Transactional
+    public void deleteUserById(int id) throws NotFoundException {
+        User dbUser = userRepository.findById(id).orElse(null);
+        if (dbUser == null)
+            throw new NotFoundException("User not found.");
+        userRepository.delete(dbUser);
     }
 }

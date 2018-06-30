@@ -6,7 +6,12 @@
 <c:set var="row_number" value="1" scope="page"/>
 <jsp:useBean id="helper" class="njt.myproject.dax.helper.Helper"/>
 <div class="row">
-    <div class="col-xs-12">
+    <div class="col-xs-2">
+        <a type="button" class="btn btn-default" title="Back" href="/admin-view">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+    </div>
+    <div class="col-xs-10">
         <h3>Mr.${userTarget.name} ${userTarget.surname} Todo Tasks</h3>
     </div>
 </div>

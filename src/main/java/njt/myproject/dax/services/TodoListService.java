@@ -79,7 +79,7 @@ public class TodoListService {
         userHasTodoListPK.setUserId(user_id);
         userHasTodoListPK.setTodoListId(task_list_id);
         if (userHasTodoListRepository.findById(userHasTodoListPK).orElse(null) == null) {
-            throw new PermissionDeniedException("You don't have premmission for this");
+            throw new PermissionDeniedException("You don't have premission for this");
         }
 
     }
